@@ -16,32 +16,32 @@ function moodReducer(state=INITIAL_STATE, action) {
 
 const store = Redux.createStore(moodReducer);
 
+
 window.onload = function() {
     const faceElement = document.getElementById("faces")
     const initialFace = store.getState().face;
     faceElement.innerText = initialFace;
+    
+    function updateUI() {
+        const newFace = store.getState().face;
+        faceElement.innerText = newFace;
+    }
 
     document.getElementById("happy").addEventListener("click", function() {
         store.dispatch({type: "HAPPY"});
-        const newFace = store.getState().face;
-        faceElement.innerText = newFace;
     });
 
     document.getElementById("love").addEventListener("click", function() {
         store.dispatch({type: "LOVE"});
-        const newFace = store.getState().face;
-        faceElement.innerText = newFace;
     });
 
     document.getElementById("sad").addEventListener("click", function() {
         store.dispatch({type: "SAD"});
-        const newFace = store.getState().face;
-        faceElement.innerText = newFace;
     });
 
     document.getElementById("sleepy").addEventListener("click", function() {
         store.dispatch({type: "SLEEPY"});
-        const newFace = store.getState().face;
-        faceElement.innerText = newFace;
     });
+
+    store.subscribe(updateUI);
 }
